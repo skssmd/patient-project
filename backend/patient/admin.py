@@ -11,6 +11,6 @@ class PatientAdmin(admin.ModelAdmin):
 
 @admin.register(PatientMetrics)
 class PatientMetricsAdmin(admin.ModelAdmin):
-    list_display = ('patient', 'weight_value', 'weight_unit', 'height_value', 'height_unit', 'duration_30_m', 'concentration', 'processed_at')
+    list_display = ('patient', 'weight_value', 'weight_unit', 'height_value', 'height_unit',  'processed_at')
     search_fields = ('patient__first_name', 'patient__last_name')
     list_filter = ('processed_at',)

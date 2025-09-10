@@ -15,15 +15,10 @@ class Patient(models.Model):
 
 
 class PatientMetrics(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='metrics')
-    
-    weight_value = models.FloatField(default=0)
+    patient = models.ForeignKey('Patient', on_delete=models.CASCADE, related_name='metrics')
+    weight_value = models.FloatField(blank=True, null=True)
     weight_unit = models.CharField(max_length=10, default='kg')
-    
-    height_value = models.FloatField(default=0)
+    height_value = models.FloatField(blank=True, null=True)
     height_unit = models.CharField(max_length=10, default='m')
-    
-    duration_30_m = models.CharField(max_length=20, blank=True, null=True)
-    concentration = models.CharField(max_length=20, blank=True, null=True)
-    
-    processed_at = models.DateTimeField(auto_now_add=True)  
+    results = models.JSONField(blank=True, null=True)  # store the array from API as-is
+    processed_at = models.DateTimeField(auto_now_add=True)
