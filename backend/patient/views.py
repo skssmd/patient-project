@@ -97,12 +97,6 @@ class BulkAddPatientView(APIView):
 
 
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .models import Patient
-from .serializers import PatientSerializer
-
 class PatientDetailView(APIView):
     """
     Return a single patient by ID
@@ -121,4 +115,21 @@ class PatientDetailView(APIView):
         return Response({
             "success": True,
             "patient": serializer.data
+        }, status=status.HTTP_200_OK)
+
+    def delete(self, request, pk):
+        try:
+            patient = Patient.objects.get(pk=pk)
+        except Patient.DoesNotExist:
+            return Response({
+                "result": {"patient": None},
+                "success": False
+            }, status=status.HTTP_404_NOT_FOUND)
+        serializer = PatientSerializer(patient)
+        patient.delete()
+        return Response({
+            "result": {
+                "patient": serializer.data
+            },
+            "success": True
         }, status=status.HTTP_200_OK)
