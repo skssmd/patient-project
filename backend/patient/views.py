@@ -20,7 +20,7 @@ class PatientView(APIView):
         except ValueError:
             page = 1
 
-        page_size = 10
+        page_size = 15
         start = (page - 1) * page_size
         end = start + page_size
 
@@ -157,12 +157,22 @@ class PatientDetailView(APIView):
 
 
 
+from rest_framework.throttling import UserRateThrottle
+
+# Custom throttle class
+class PatientProcessRateThrottle(UserRateThrottle):
+    scope = 'patient_process'
+
+
+
+# Update your view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+import requests
 
 class ProcessPatientView(APIView):
-    """
-    Accept weight/height from user, call external process API if needed,
-    store results, and return full response.
-    """
+    throttle_classes = [PatientProcessRateThrottle]  # add throttle here
 
     def post(self, request, pk):
         # Fetch patient
@@ -198,7 +208,6 @@ class ProcessPatientView(APIView):
         ).first()
 
         if metrics:
-            # Structure results for response
             results = [
                 {"duration_30_m": r[0], "concentration": r[1]} for r in (metrics.results or [])
             ]
@@ -231,10 +240,9 @@ class ProcessPatientView(APIView):
             weight_unit=data["patient"]["weight"]["unit"],
             height_value=data["patient"]["height"]["value"],
             height_unit=data["patient"]["height"]["unit"],
-            results=data.get("results", [])  # store raw
+            results=data.get("results", [])
         )
 
-        # Structure results for response
         structured_results = [
             {"duration_30_m": r[0], "concentration": r[1]} for r in (metrics.results or [])
         ]

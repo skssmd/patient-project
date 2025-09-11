@@ -23,16 +23,15 @@ services:
     working_dir: /app
 
     environment:
-      - DEBUG=1
-      - SECRET_KEY=supersecret
+      - PATIENT_PROCESS_THROTTLE=5/min
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/patient
-      - ALLOWED_HOSTS=*
+      
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
-      - "traefik.http.middlewares.backend-stripprefix.stripprefix.prefixes=/api"
-      - "traefik.http.routers.backend.middlewares=backend-stripprefix"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`) || PathPrefix(`/static`)"
+      - "traefik.http.routers.backend.priority=10"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
+
     depends_on:
       - postgres
     restart: always
@@ -53,7 +52,7 @@ services:
     command: npm run dev
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`) && !PathPrefix(`/api`) && !PathPrefix(`/static`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
     depends_on:
       - backend

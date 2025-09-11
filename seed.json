@@ -1,0 +1,366 @@
+[
+    {
+        "first_name": "Joseph",
+        "last_name": "Hernandez",
+        "dob": "2002-01-13",
+        "sex": "other",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Sophia",
+        "last_name": "Nguyen",
+        "dob": "1995-06-24",
+        "sex": "female",
+        "ethnic_background": "Asian"
+    },
+    {
+        "first_name": "Liam",
+        "last_name": "Patel",
+        "dob": "1988-03-15",
+        "sex": "male",
+        "ethnic_background": "Indian"
+    },
+    {
+        "first_name": "Amelia",
+        "last_name": "Johnson",
+        "dob": "1972-11-03",
+        "sex": "female",
+        "ethnic_background": "African American"
+    },
+    {
+        "first_name": "Ethan",
+        "last_name": "Martinez",
+        "dob": "2000-09-08",
+        "sex": "male",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Olivia",
+        "last_name": "Brown",
+        "dob": "1999-02-18",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Noah",
+        "last_name": "Kim",
+        "dob": "1985-07-22",
+        "sex": "male",
+        "ethnic_background": "Korean"
+    },
+    {
+        "first_name": "Ava",
+        "last_name": "Garcia",
+        "dob": "1993-04-30",
+        "sex": "female",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Mason",
+        "last_name": "White",
+        "dob": "1978-08-12",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Isabella",
+        "last_name": "Singh",
+        "dob": "2001-12-05",
+        "sex": "female",
+        "ethnic_background": "Indian"
+    },
+    {
+        "first_name": "James",
+        "last_name": "Lopez",
+        "dob": "1989-06-10",
+        "sex": "male",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Mia",
+        "last_name": "Davis",
+        "dob": "1997-04-14",
+        "sex": "female",
+        "ethnic_background": "African American"
+    },
+    {
+        "first_name": "Benjamin",
+        "last_name": "Clark",
+        "dob": "1975-01-29",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Charlotte",
+        "last_name": "Rodriguez",
+        "dob": "1994-09-17",
+        "sex": "female",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Elijah",
+        "last_name": "Lee",
+        "dob": "1982-02-20",
+        "sex": "male",
+        "ethnic_background": "Korean"
+    },
+    {
+        "first_name": "Harper",
+        "last_name": "Wilson",
+        "dob": "2003-07-09",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Alexander",
+        "last_name": "Young",
+        "dob": "1979-05-05",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Ella",
+        "last_name": "Adams",
+        "dob": "1996-11-25",
+        "sex": "female",
+        "ethnic_background": "African American"
+    },
+    {
+        "first_name": "William",
+        "last_name": "Scott",
+        "dob": "1984-08-30",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Grace",
+        "last_name": "Baker",
+        "dob": "2001-12-19",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Lucas",
+        "last_name": "Morris",
+        "dob": "1990-04-21",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Zoe",
+        "last_name": "King",
+        "dob": "1998-09-03",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Daniel",
+        "last_name": "Perez",
+        "dob": "1976-10-27",
+        "sex": "male",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Chloe",
+        "last_name": "Torres",
+        "dob": "1993-03-11",
+        "sex": "female",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Matthew",
+        "last_name": "Ramirez",
+        "dob": "1987-06-16",
+        "sex": "male",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Victoria",
+        "last_name": "Kelly",
+        "dob": "1992-01-08",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "David",
+        "last_name": "Howard",
+        "dob": "1981-11-19",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Aria",
+        "last_name": "Ward",
+        "dob": "2000-05-30",
+        "sex": "female",
+        "ethnic_background": "African American"
+    },
+    {
+        "first_name": "Jackson",
+        "last_name": "Gonzalez",
+        "dob": "1977-12-13",
+        "sex": "male",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Scarlett",
+        "last_name": "Phillips",
+        "dob": "1999-09-23",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Henry",
+        "last_name": "Evans",
+        "dob": "1983-02-17",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Lily",
+        "last_name": "Turner",
+        "dob": "1991-07-28",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Samuel",
+        "last_name": "Diaz",
+        "dob": "1986-10-09",
+        "sex": "male",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Hannah",
+        "last_name": "Allen",
+        "dob": "1994-06-05",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Michael",
+        "last_name": "Rivera",
+        "dob": "1974-01-22",
+        "sex": "male",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Abigail",
+        "last_name": "Sanchez",
+        "dob": "1998-03-14",
+        "sex": "female",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Sebastian",
+        "last_name": "Price",
+        "dob": "1980-12-29",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Ella",
+        "last_name": "Flores",
+        "dob": "1997-09-01",
+        "sex": "female",
+        "ethnic_background": "Hispanic"
+    },
+    {
+        "first_name": "Jack",
+        "last_name": "Long",
+        "dob": "1989-02-12",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Avery",
+        "last_name": "Cook",
+        "dob": "2002-06-26",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Owen",
+        "last_name": "Morgan",
+        "dob": "1978-08-17",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Evelyn",
+        "last_name": "Bell",
+        "dob": "1995-04-04",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Jacob",
+        "last_name": "Murphy",
+        "dob": "1983-05-12",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Sofia",
+        "last_name": "Bailey",
+        "dob": "1996-07-19",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Carter",
+        "last_name": "Cooper",
+        "dob": "1981-09-08",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Riley",
+        "last_name": "Richardson",
+        "dob": "1993-11-06",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Wyatt",
+        "last_name": "Cox",
+        "dob": "1985-02-03",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Emily",
+        "last_name": "Ward",
+        "dob": "1999-01-20",
+        "sex": "female",
+        "ethnic_background": "African American"
+    },
+    {
+        "first_name": "Logan",
+        "last_name": "Richardson",
+        "dob": "1976-05-14",
+        "sex": "male",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Madison",
+        "last_name": "Brooks",
+        "dob": "1992-08-09",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    },
+    {
+        "first_name": "Jayden",
+        "last_name": "Ward",
+        "dob": "1987-12-18",
+        "sex": "male",
+        "ethnic_background": "African American"
+    },
+    {
+        "first_name": "Ella",
+        "last_name": "Griffin",
+        "dob": "1998-04-27",
+        "sex": "female",
+        "ethnic_background": "Caucasian"
+    }
+]

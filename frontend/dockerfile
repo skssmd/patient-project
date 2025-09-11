@@ -1,0 +1,21 @@
+# Use Node.js image with npm
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy rest of the source code
+COPY . .
+
+# Expose Next.js default dev port
+EXPOSE 3000
+
+# Run in development mode with hot reload
+CMD ["npm", "run", "dev", "--", "-H", "0.0.0.0", "-p", "3000"]
+
