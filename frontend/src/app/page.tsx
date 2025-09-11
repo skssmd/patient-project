@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -28,22 +29,29 @@ export default function HomePage() {
   const [patientToDelete, setPatientToDelete] = useState<Patient | null>(null);
 
   const router = useRouter();
-  const fetchPatients = async (pageNum: number) => {
-    setIsFetching(true);
-    try {
-      const res = await fetch(`${API_URL}/patients?page=${pageNum}`);
-      const data = await res.json();
-      if (data.series?.success) {
-        setPatients((prev) => [...prev, ...data.series.result.patients]);
-        setTotalPages(data.series.result.total_pages);
-      }
-    } catch (error) {
-      console.error('Error fetching patients:', error);
-    } finally {
-      setLoading(false);
-      setIsFetching(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
+const fetchPatients = async (pageNum: number) => {
+  setIsFetching(true);
+  try {
+    const res = await fetch(`${API_URL}/patients?page=${pageNum}`);
+    if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+    const data = await res.json();
+    if (data.series?.success) {
+      setPatients((prev) => [...prev, ...data.series.result.patients]);
+      setTotalPages(data.series.result.total_pages);
+    } else {
+      throw new Error("Failed to fetch patients");
     }
-  };
+  } catch (error: any) {
+    console.error('Error fetching patients:', error);
+    setFetchError('Server is not reachable. Please check your connection.');
+  } finally {
+    setLoading(false);
+    setIsFetching(false);
+  }
+};
+
 
   useEffect(() => {
     fetchPatients(page);
@@ -219,6 +227,20 @@ export default function HomePage() {
         />
       )}
 
+       {/* ShadCN Dialog for Fetch Error */}
+    <Dialog open={!!fetchError} onOpenChange={() => setFetchError(null)}>
+      <DialogContent>
+        <DialogHeader className="text-center">
+          <DialogTitle>Connection Error</DialogTitle>
+          <p>{fetchError}</p>
+        </DialogHeader>
+        <DialogFooter className="flex justify-center">
+          <Button variant="outline" onClick={() => setFetchError(null)}>
+            Close
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
     </div>
 
   );
@@ -262,7 +284,7 @@ function AddPatientForm({ onClose, onAdd }: Props) {
     ethnic_background: '',
   });
   const [submitting, setSubmitting] = useState(false);
-
+const [fetchError, setFetchError] = useState<string | null>(null); // new
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -276,28 +298,35 @@ function AddPatientForm({ onClose, onAdd }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+
+      if (!res.ok) throw new Error(`Server responded with ${res.status}`);
       const data = await res.json();
+
       if (data.series?.success && data.series.result?.patient) {
         onAdd(data.series.result.patient);
         onClose();
+      } else {
+        throw new Error('Failed to add patient');
       }
-    } catch (error) {
+    } catch (error: never) {
       console.error('Error adding patient:', error);
+      setFetchError('Server is not reachable. Please check your connection.');
     } finally {
       setSubmitting(false);
     }
   };
   return (
-    <Dialog open onOpenChange={onClose}>
-      {/* Overlay with blur */}
-      <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
+    <>
+         <Dialog open onOpenChange={onClose}>
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
 
-      <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-md w-full bg-white p-6 rounded-2xl shadow-xl z-50">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-gray-800">
-            Add New Patient
-          </DialogTitle>
-        </DialogHeader>
+        <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-md w-full bg-white p-6 rounded-2xl shadow-xl z-50">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold text-gray-800">
+              Add New Patient
+            </DialogTitle>
+          </DialogHeader>
+
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
           {/* First Name */}
@@ -386,16 +415,36 @@ function AddPatientForm({ onClose, onAdd }: Props) {
           </div>
 
           <DialogFooter className="flex justify-end gap-3 mt-5">
-            <Button variant="outline" onClick={onClose} className="w-24">
-              Cancel
-            </Button>
-            <Button type="submit" className="w-28 bg-blue-600 text-white hover:bg-blue-700" disabled={submitting}>
-              {submitting ? 'Adding...' : 'Add Patient'}
+              <Button variant="outline" onClick={onClose} className="w-24">
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                className="w-28 bg-blue-600 text-white hover:bg-blue-700"
+                disabled={submitting}
+              >
+                {submitting ? 'Adding...' : 'Add Patient'}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* ShadCN Dialog for Fetch Error */}
+      <Dialog open={!!fetchError} onOpenChange={() => setFetchError(null)}>
+        <DialogContent>
+          <DialogHeader className="text-center">
+            <DialogTitle>Connection Error</DialogTitle>
+            <p>{fetchError}</p>
+          </DialogHeader>
+          <DialogFooter className="flex justify-center">
+            <Button variant="outline" onClick={() => setFetchError(null)}>
+              Close
             </Button>
           </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+        </DialogContent>
+      </Dialog>
+      </>
   );
 
 }

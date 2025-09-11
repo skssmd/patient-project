@@ -1,7 +1,3 @@
-DOCKER_MODE = True
-
-
-
 """
 Django settings for config project.
 
@@ -95,6 +91,8 @@ REST_FRAMEWORK = {
 # backend/config/settings.py
 # settings.py
 
+
+DOCKER_MODE = os.getenv("DOCKER_MODE", "false").lower() == "true"
 
 if DOCKER_MODE:
     DATABASES = {

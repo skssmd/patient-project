@@ -156,23 +156,20 @@ class PatientDetailView(APIView):
 
 
 
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.throttling import UserRateThrottle
+import requests
+from requests.exceptions import RequestException, Timeout, ConnectionError
 
 # Custom throttle class
 class PatientProcessRateThrottle(UserRateThrottle):
     scope = 'patient_process'
 
 
-
-# Update your view
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-import requests
-
 class ProcessPatientView(APIView):
-    throttle_classes = [PatientProcessRateThrottle]  # add throttle here
+    throttle_classes = [PatientProcessRateThrottle]
 
     def post(self, request, pk):
         # Fetch patient
@@ -192,13 +189,12 @@ class ProcessPatientView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Extract nested values
         weight_value = serializer.validated_data['weight']['value']
         weight_unit = serializer.validated_data['weight']['unit']
         height_value = serializer.validated_data['height']['value']
         height_unit = serializer.validated_data['height']['unit']
 
-        # Check if metrics with same weight/height already exist
+        # Check if metrics already exist
         metrics = PatientMetrics.objects.filter(
             patient=patient,
             weight_value=weight_value,
@@ -226,22 +222,49 @@ class ProcessPatientView(APIView):
             "height": {"value": height_value, "unit": height_unit}
         }
         external_url = f"https://coding-patient-api.vesynta.workers.dev/api/patients/{pk}/process"
-        resp = requests.post(external_url, json=payload, verify=False)
 
-        if resp.status_code != 200:
-            return Response({"success": False, "error": resp.text}, status=resp.status_code)
+        try:
+            resp = requests.post(external_url, json=payload, timeout=10, verify=False)
+            resp.raise_for_status()  # Raise exception for HTTP errors
+            data = resp.json()       # Could raise JSONDecodeError
+        except (RequestException, ConnectionError, Timeout) as e:
+            return Response(
+                {"success": False, "error": f"External API request failed: {str(e)}"},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+        except ValueError:  # JSON decode error
+            return Response(
+                {"success": False, "error": "Invalid JSON returned from external API"},
+                status=status.HTTP_502_BAD_GATEWAY
+            )
 
-        data = resp.json()
+        # Validate keys exist in the response
+        try:
+            patient_data = data["patient"]
+            weight_data = patient_data["weight"]
+            height_data = patient_data["height"]
+            results_data = data.get("results", [])
+        except KeyError as e:
+            return Response(
+                {"success": False, "error": f"Missing expected key in API response: {str(e)}"},
+                status=status.HTTP_502_BAD_GATEWAY
+            )
 
-        # Save raw results in DB
-        metrics = PatientMetrics.objects.create(
-            patient=patient,
-            weight_value=data["patient"]["weight"]["value"],
-            weight_unit=data["patient"]["weight"]["unit"],
-            height_value=data["patient"]["height"]["value"],
-            height_unit=data["patient"]["height"]["unit"],
-            results=data.get("results", [])
-        )
+        # Save to DB
+        try:
+            metrics = PatientMetrics.objects.create(
+                patient=patient,
+                weight_value=weight_data["value"],
+                weight_unit=weight_data["unit"],
+                height_value=height_data["value"],
+                height_unit=height_data["unit"],
+                results=results_data
+            )
+        except Exception as e:
+            return Response(
+                {"success": False, "error": f"Failed to save metrics: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         structured_results = [
             {"duration_30_m": r[0], "concentration": r[1]} for r in (metrics.results or [])

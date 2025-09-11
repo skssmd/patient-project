@@ -23,6 +23,7 @@ services:
     working_dir: /app
 
     environment:
+      - DOCKER_MODE=true
       - PATIENT_PROCESS_THROTTLE=5/min
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/patient
       
