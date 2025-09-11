@@ -109,7 +109,7 @@ Frontend will run at `http://localhost:3000`.
 
 ## Environment Variables
 <!--  -->
-- `DEBUG` – set to `1` for development
+
 - `PATIENT_PROCESS_THROTTLE` – rate limit for patient process endpoint (e.g., `2/min`)
 - `DATABASE_URL` – PostgreSQL connection string, e.g., `postgres://postgres:postgres@postgres:5432/patient`
 
