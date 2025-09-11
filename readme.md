@@ -65,11 +65,7 @@ pip install -r requirements.txt
 ```
 4. Run migrations
 
-Before running migrations, open `config/settings.py` and find the `DOCKER_MODE` variable at the top. Set it to `False` for local development:
-
-DOCKER_MODE = False
-
-Then, in your terminal, run:
+In terminal, run:
 ```bash
 python manage.py makemigrations
 python manage.py migrate
