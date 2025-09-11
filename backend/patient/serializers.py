@@ -2,6 +2,8 @@
 from rest_framework import serializers
 from .models import Patient
 from django.utils.dateparse import parse_date
+from .models import PatientMetrics
+
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,12 +24,6 @@ class AddPatientSerializer(serializers.ModelSerializer):
 
 
 
-# serializers.py
-from rest_framework import serializers
-from .models import PatientMetrics
-
-from rest_framework import serializers
-from .models import PatientMetrics
 
 class PatientMetricsPostSerializer(serializers.ModelSerializer):
     """

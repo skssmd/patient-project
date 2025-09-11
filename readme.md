@@ -89,7 +89,7 @@ Backend will run at `127.0.0.1:8000` by default.
 1. Navigate to the frontend directory:
 
 ```bash
-cd project/frontend
+cd patient/frontend
 ```
 
 2. Install dependencies:
