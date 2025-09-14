@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["file:///D:/patient/frontend/src/pages/_app.tsx"],"sourcesContent":["// app.tsx (Next.js 13 App Router) or pages/_app.tsx (Pages Router)\nimport type { AppProps } from 'next/app';\nimport '../app/globals.css'; // import Tailwind CSS globally\n\nexport default function App({ Component, pageProps }: AppProps) {\n    return <Component {...pageProps} />;\n}\n"],"names":[],"mappings":"AAAA,mEAAmE;;;;;;;AAIpD,SAAS,IAAI,EAAE,SAAS,EAAE,SAAS,EAAY;IAC1D,qBAAO,qKAAC;QAAW,GAAG,SAAS;;;;;;AACnC","debugId":null}}]
-}
